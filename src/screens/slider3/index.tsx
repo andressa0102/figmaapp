@@ -4,21 +4,21 @@ import {
     ComponentButtonSlider, ComponentListMarker, ComponentTitleSlider
 } from '../../components';
 import { styles } from './styles';
-export function Slider1({ setPageI }: IPage) {
-    const slide1 = require("../../assets/slide1.png")
-    const slide1Texts = [
-        { id: '1', text: 'Café Latte'},
-        { id: '2', text: 'Cappuccino Italiano'},
-        { id: '3', text: 'Cappuccino Avelã'},
-        { id: '4', text: 'Cappuccino Mineiro'},
-        { id: '5', text: 'Mocha Caramelo'},
+export function Slider3({ setPageI }: IPage) {
+    const slide3 = require("../../assets/slide3.png")
+    const slide3Texts = [
+        { id: '1', text: 'Frappé Café'},
+        { id: '2', text: 'Frappé Avelã'},
+        { id: '3', text: 'Frappé Mineiro'},
+        { id: '4', text: 'Frappé Limone'},
+        { id: '5', text: 'Latte Vanilla'},
     ]
     return (
-        <ImageBackground source={slide1} style={styles.container} >
+        <ImageBackground source={slide3} style={styles.container} >
             <View style={styles.panel}>
-                <ComponentTitleSlider titleI='Cappuccinos' />
+                <ComponentTitleSlider titleI='Cafés Gelado' />
                 <FlatList
-                    data={slide1Texts}
+                    data={slide3Texts}
                     renderItem={({ item }) =>
                         <ComponentListMarker key={item.id} textMarker={item.text} />
                     }
