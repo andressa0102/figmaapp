@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
         marginTop: 40,
         margin: 20,
         borderRadius: 20,
-        backgroundColor: colors.secondary
+        backgroundColor: colors.thirdLight
     },
     buttonSlider: {
         flexDirection: "row",
