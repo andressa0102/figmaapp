@@ -1,14 +1,21 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
 import { ScreenCadastrar, ScreenLogin} from "../screens"
-
-const Stack = createStackNavigator();
+type RootStackParamList = {
+  Login: undefined;
+  Cadastrar: undefined
+};
+type LoginScreenNavigation = StackNavigationProp<RootStackParamList, 'Login'>
+export type LoginTypes = {
+  navigation: LoginScreenNavigation
+}
 
 export function LoginNavigation() {
+  const Stack = createStackNavigator();
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Cadastrar" component={ScreenCadastrar} />
       <Stack.Screen name="Login" component={ScreenLogin} />
+      <Stack.Screen name="Cadastrar" component={ScreenCadastrar} />
     </Stack.Navigator>
   );
 }
