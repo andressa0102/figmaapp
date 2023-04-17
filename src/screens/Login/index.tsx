@@ -31,8 +31,8 @@ export function Login({navigation}:LoginTypes) {
                         style={styles.input}
                     />
                 </View>
-                <ComponentButtonInterface title="Entrar" type="primary" onPressI={()=>{navigation.navigate("Cadastrar")}} />
-                <ComponentButtonInterface title="Cadastrar" type="primary" onPressI={()=>{console.log("Cadastrar")}} />
+                <ComponentButtonInterface title='Entrar' type="primary" onPressI={()=>{console.log('Entrar')}} />
+                <ComponentButtonInterface title='Cadastre-se' type="primary" onPressI={()=>{navigation.navigate("Cadastrar")}} />
             </KeyboardAvoidingView>
         </View>
     

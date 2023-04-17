@@ -5,12 +5,14 @@ import { MaterialIcons, Entypo } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from "../../styles/colors";
 import { ComponentButtonInterface } from "../../components"
+import { Navigation } from "../../navigations";
+import { LoginTypes } from "../../navigations/login.navigation";
 
-export function Cadastrar() {
+export function Cadastrar({navigation}:LoginTypes) {
     return (
         <View style={styles.container}>
             <KeyboardAvoidingView>
-                <Text style ={styles.title}>Cadastre-se</Text>
+                <Text style ={styles.title}>Cadastrar</Text>
                 <View style={styles.formRow}>
                     <Ionicons name="person" size={24} color="black" />
                     <TextInput
@@ -38,8 +40,8 @@ export function Cadastrar() {
                         style={styles.input}
                     />
                 </View>
-                <ComponentButtonInterface title="Salvar" type="primary" onPressI={()=>{console.log("Cadastrar")}} />
-                <ComponentButtonInterface title="Voltar" type="primary" onPressI={()=>{console.log("Login")}} />
+                <ComponentButtonInterface title='Salvar' type='primary' onPressI={()=>{console.log('Salvar')}} />
+                <ComponentButtonInterface title='Voltar' type='primary' onPressI={()=>{navigation.navigate('Login')}} />
             </KeyboardAvoidingView>
         </View>
     
