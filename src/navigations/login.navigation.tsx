@@ -4,7 +4,7 @@ import { ScreenCadastrar, ScreenLogin} from "../screens"
 import { TabNavigation } from './tab.navigation';
 import { DrawerNavigation } from './drawer.navigation';
 type RootStackParamList = {
-  Login: undefined;
+  Login: undefined
   Cadastrar: undefined
   Tab: undefined
   Drawer: undefined
