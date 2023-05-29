@@ -3,12 +3,13 @@ import { Dimensions, StyleSheet } from "react-native"
 export const styles = StyleSheet.create({
     container: {
       flex: 1,
-      justifyContent: 'center',
+      justifyContent: 'space-between',
+      alignItems: 'center'
     },
     camera: {
       flex: 1,
-      height: Dimensions.get('window').width * 1.0,
-      width: Dimensions.get('window').width * 1.0
+      height: Dimensions.get('window').width,
+      width: Dimensions.get('window').width
     },
     buttonContainer: {
       flex: 1,
@@ -17,8 +18,6 @@ export const styles = StyleSheet.create({
       margin: 64,
     },
     button: {
-      flex: 1,
-      alignSelf: 'flex-end',
       alignItems: 'center',
     },
     text: {
@@ -27,8 +26,8 @@ export const styles = StyleSheet.create({
       color: 'white',
     },
     img: {
-        height: Dimensions.get('window').width * 1.0,
-        width: Dimensions.get('window').width * 1.0
+        height: Dimensions.get('window').width * 0.6,
+        width: Dimensions.get('window').width * 0.6
     },
   });
   

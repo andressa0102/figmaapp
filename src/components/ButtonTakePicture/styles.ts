@@ -3,10 +3,10 @@ import { colors } from '../../styles/colors';
 
 export const styles = StyleSheet.create({
     ball: {
-        width: 30,
-        height: 30,
+        width: 70,
+        height: 70,
         backgroundColor: colors.secondary,
-        borderRadius: 15
+        borderRadius: 50
 
     }
 })

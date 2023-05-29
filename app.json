@@ -40,6 +40,12 @@
           "savePhotosPermission": "Permita $(PRODUCT_NAME) salvar fotos",
           "isAccessMediaLocationEnabled": true
         }
+      ],
+      [
+        "expo-barcode-scanner",
+        {
+          "cameraPermission": "Permita $(PRODUCT_NAME) acesar a câmera."
+        }
       ]
     ]
   }

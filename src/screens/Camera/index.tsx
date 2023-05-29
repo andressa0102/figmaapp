@@ -5,12 +5,9 @@ import { ComponentButtonInterface, ComponentButtonTakePicture } from '../../comp
 import { styles } from './styles';
 import { AntDesign } from '@expo/vector-icons';
 import * as ImagePicker from "expo-image-picker";
-import * as MediaLibrary from "expo-media-library"
-interface IPhoto {
-  height: string
-  uri: string
-  width: string
-}
+import * as MediaLibrary from "expo-media-library";
+import * as FaceDetector from 'expo-face-detector';
+import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
 
 export function CameraScreen() {
   const [type, setType] = useState(CameraType.back);
@@ -19,6 +16,9 @@ export function CameraScreen() {
   const [photo, setPhoto] = useState<CameraCapturedPicture | ImagePicker.ImagePickerAsset>()
   const ref = useRef<Camera>(null)
   const [takePhoto, setTakePhoto] = useState(false)
+  const [permissionQrCode, requestPermissionQrCode] = BarCodeScanner.usePermissions();
+  const [scanned, setScanned] = useState(false);
+  const [face, setface] = useState<FaceDetector.FaceFeature>()
 
   if (!permissionCamera) {
     // Camera permissions are still loading
@@ -58,7 +58,37 @@ export function CameraScreen() {
       const picture = await ref.current.takePictureAsync()
       console.log(picture)
       setPhoto(picture)
+      setTakePhoto(false)
     }
+  }
+
+  if (!permissionQrCode) {
+    // Camera permissions are still loading
+    return <View />;
+  }
+
+  if (!permissionQrCode.granted) {
+    // Camera permissions are not granted yet
+    return (
+      <View style={styles.container}>
+        <Text style={{ textAlign: 'center' }}>Precisamos de permissão para acessar o QrCode!!!</Text>
+        <Button onPress={requestPermissionQrCode} title="grant permission" />
+      </View>
+    );
+  }
+
+  const handleBarCodeScanned = ({ type, data }: BarCodeScannerResult) => {
+    setScanned(true);
+    alert(data);
+  };
+
+  const handleFacesDetected = ({ faces }: FaceDetectionResult): void => {
+
+
+
+
+
+
   }
 
   async function savePhoto() {
@@ -80,17 +110,33 @@ export function CameraScreen() {
 
   return (
     <View style={styles.container}>
-      <Camera style={styles.camera} type={type} ref={ref}>
-        <TouchableOpacity onPress={toggleCameraType} style={styles.container}>
-          <AntDesign name="retweet" size={40} color="black" type='secondary' />
-        </TouchableOpacity>
-      </Camera>
-      <ComponentButtonInterface title='Tirar Foto' type='secondary' onPressI={takePicture} />
-      <ComponentButtonInterface title='Salvar Imagem' type='secondary' onPressI={savePhoto} />
-      <ComponentButtonInterface title='Abrir Imagem' type='secondary' onPressI={pickImage} />
+      {takePhoto ? (
+        <>
+          <TouchableOpacity onPress={toggleCameraType} >
+            <AntDesign name="retweet" size={40} color="black" type='secondary' />
+          </TouchableOpacity>
+          <Camera style={styles.camera} type={type} ref={ref} 
+            onFacesDetected={handleFacesDetected}
 
-      {photo && photo.uri && (
-        <Image source={{ uri: photo.uri }} style={styles.img} />
+
+
+            
+            onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}  
+          />
+          <ComponentButtonTakePicture onPress={takePicture} />
+          <ComponentButtonInterface title='Escaneie novamente' type='secondary' onPressI={()=> setScanned(false)} />
+        </>
+      ) : (
+        <>
+          <ComponentButtonInterface title='Tirar Foto' type='secondary' onPressI={()=> setTakePhoto(true)} />
+          {photo && photo.uri && (
+            <>
+            <Image source={{ uri: photo.uri }} style={styles.img} />
+            <ComponentButtonInterface title='Salvar Imagem' type='secondary' onPressI={savePhoto} />
+            </>
+          )}
+          <ComponentButtonInterface title='Abrir Imagem' type='secondary' onPressI={pickImage} />
+        </>
       )}
     </View>
   );
