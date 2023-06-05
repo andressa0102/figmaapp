@@ -29,5 +29,9 @@ export const styles = StyleSheet.create({
         height: Dimensions.get('window').width * 0.6,
         width: Dimensions.get('window').width * 0.6
     },
+    sorriso: {
+      justifyContent: 'space-between',
+      alignItems: 'center'
+    },
   });
   

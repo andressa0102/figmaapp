@@ -1,4 +1,4 @@
-import { Camera, CameraCapturedPicture, CameraType } from 'expo-camera';
+import { Camera, CameraCapturedPicture, CameraType, FaceDetectionResult } from 'expo-camera';
 import { useState, useRef } from 'react';
 import { Button, StyleSheet, Text, TouchableOpacity, View, Image, Alert } from 'react-native';
 import { ComponentButtonInterface, ComponentButtonTakePicture } from '../../components';
@@ -18,7 +18,7 @@ export function CameraScreen() {
   const [takePhoto, setTakePhoto] = useState(false)
   const [permissionQrCode, requestPermissionQrCode] = BarCodeScanner.usePermissions();
   const [scanned, setScanned] = useState(false);
-  const [face, setface] = useState<FaceDetector.FaceFeature>()
+  const [face, setFace] = useState<FaceDetector.FaceFeature>()
 
   if (!permissionCamera) {
     // Camera permissions are still loading
@@ -83,12 +83,26 @@ export function CameraScreen() {
   };
 
   const handleFacesDetected = ({ faces }: FaceDetectionResult): void => {
+    if (faces.length >0 ) {
+      const faceDetect = faces[0] as FaceDetector.FaceFeature
+      setFace(faceDetect)
+    }else{
+      setFace(undefined)
+    }
+    };
 
 
+  if (!permissionMedia) {
+    return <View />;
+  }
 
-
-
-
+  if (!permissionMedia.granted) {
+    return (
+      <View style={styles.container}>
+        <Text style={{ textAlign: 'center' }}>Precisa de sua permissão para salvar a imagem</Text>
+        <Button onPress={requestPermissionMedia} title="permita o acesso" />
+      </View>
+    );
   }
 
   async function savePhoto() {
@@ -115,12 +129,22 @@ export function CameraScreen() {
           <TouchableOpacity onPress={toggleCameraType} >
             <AntDesign name="retweet" size={40} color="black" type='secondary' />
           </TouchableOpacity>
+          <View style={styles.sorriso}>
+      {face&&face.smilingProbability && face.smilingProbability> 0.5?(
+        <Text>Sorrindo</Text>
+      ): (
+        <Text>Não</Text>
+      )}
+    </View>
           <Camera style={styles.camera} type={type} ref={ref} 
             onFacesDetected={handleFacesDetected}
-
-
-
-            
+            faceDetectorSettings={{
+                mode: FaceDetector.FaceDetectorMode.accurate,
+                detectLandMarks: FaceDetector.FaceDetectorLandmarks.all,
+                runClassifications: FaceDetector.FaceDetectorClassifications.all,
+                minDetectionInterval:1000,
+                tracking:true,
+              }}
             onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}  
           />
           <ComponentButtonTakePicture onPress={takePicture} />
