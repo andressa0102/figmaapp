@@ -5,11 +5,10 @@ import { MaterialIcons, Entypo } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from "../../styles/colors";
 import { ComponentButtonInterface, ComponentLoading } from "../../components"
-import { Navigation } from "../../navigations";
 import { LoginTypes } from "../../navigations/login.navigation";
 import { IRegister } from '../../services/data/User'
 import { apiUser } from "../../services/data";
-import { Axios, AxiosError } from "axios";
+import { AxiosError } from "axios";
 export interface IErrorApi {
     errors: {
         rule: string
