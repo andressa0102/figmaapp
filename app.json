@@ -15,13 +15,29 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "Permita $(PRODUCT_NAME) acessar a sua galeria.",
+        "NSPhotoLibraryAddUsageDescription": "Permita $(PRODUCT_NAME) salvar fotos",
+        "NSCameraUsageDescription": "Permita $(PRODUCT_NAME) acesar a câmera.",
+        "NSMicrophoneUsageDescription": "Allow $(PRODUCT_NAME) to access your microphone"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.ACCESS_MEDIA_LOCATION",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.FOREGROUND_SERVICE"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -53,7 +69,17 @@
           "locationAlwaysAndWhenInUsePermission": "Permita $(PRODUCT_NAME) usar sua localização."
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "b6ab8826-584e-447e-9c2d-74bc4c9e5bf0"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/b6ab8826-584e-447e-9c2d-74bc4c9e5bf0"
+    }
   }
 }
-
