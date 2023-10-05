@@ -25,16 +25,17 @@ export function Cadastrar({ navigation }: LoginTypes) {
             if(data?.name && data.email && data.password) {
                 const response = await apiUser.register(data)
                 Alert.alert(`${response.data.name} cadastrado!!!`)
+                setIsLoading(false)
                 navigation.navigate('Login')
             }else {
                 Alert.alert("Preencha todos os campos!!!")
             }
         } catch (error) {
             const err = error as AxiosError
-            const errData = err.response?.data as IErrorApi
+            const errorData = err.response?.data as IErrorApi
             let message = ""
-            if(errData) {
-                for (const iterator of errData.errors) {
+            if(errorData) {
+                for (const iterator of errorData.errors) {
                     message = `${message} ${iterator.message} \n`
                 }
             }

@@ -1,16 +1,25 @@
 {
   "cli": {
-    "version": ">= 5.2.0"
+    "version": ">= 5.4.0"
   },
   "build": {
     "development": {
       "developmentClient": true,
-      "distribution": "internal"
+      "distribution": "internal",
+      "channel": "development"
     },
     "preview": {
-      "distribution": "internal"
+      "distribution": "internal",
+      "channel": "preview"
     },
-    "production": {}
+    "preview2": {
+      "android": {
+        "buildType": "apk"
+      }
+    },
+    "production": {
+      "channel": "production"
+    }
   },
   "submit": {
     "production": {}

@@ -33,6 +33,7 @@ export async function registerForPushNotificationsAsync() {
     token = (await Notifications.getExpoPushTokenAsync({
       projectId: extra.eas.projectId,
     }));
+    console.log(token)
     await apiUser.updateToken(token.data);
   } else {
     Alert.alert('Você deve ter um dispositivo físico para receber notificações Push');
