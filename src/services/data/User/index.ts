@@ -2,7 +2,7 @@ import { api } from '../../api'
 export interface IRegister {
     name?: string
     email?: string
-    passoword?: string
+    password?: string
 }
 export interface IAuthenticate {
     email?: string

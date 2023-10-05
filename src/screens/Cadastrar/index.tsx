@@ -22,7 +22,7 @@ export function Cadastrar({ navigation }: LoginTypes) {
     async function handleRegister() {
         try {
             setIsLoading(true)
-            if(data?.name && data.email && data.passoword) {
+            if(data?.name && data.email && data.password) {
                 const response = await apiUser.register(data)
                 Alert.alert(`${response.data.name} cadastrado!!!`)
                 navigation.navigate('Login')
@@ -88,7 +88,7 @@ export function Cadastrar({ navigation }: LoginTypes) {
                                 secureTextEntry={true}
                                 autoCapitalize="none"
                                 style={styles.input}
-                                onChangeText={(i) => handleChange({ passoword: i })}
+                                onChangeText={(i) => handleChange({ password: i })}
                             />
                         </View>
                         <ComponentButtonInterface title='Salvar' type='primary' onPressI={handleRegister} />
